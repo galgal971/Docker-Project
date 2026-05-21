@@ -16,6 +16,9 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            if [ ! -d "~/Docker-Project" ]; then
+              git clone https://github.com/galgal971/Docker-Project.git ~/Docker-Project
+            fi
             cd ~/Docker-Project
             git pull origin main
             docker stop my-running-site || true
