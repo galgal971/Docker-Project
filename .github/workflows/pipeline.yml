@@ -21,7 +21,7 @@ jobs:
             fi
             cd ~/Docker-Project
             git pull origin main
-            docker stop my-running-site || true
-            docker rm my-running-site || true
-            docker build -t my-web-app .
-            docker run -d -p 80:80 --name my-running-site my-web-app
+            docker stop $(docker ps -aq) || true
+            docker rm $(docker ps -aq) || true
+            docker build -t web-server .
+            docker run -d -p 80:80 --name web-app web-server
