@@ -28,4 +28,3 @@ jobs:
             # Use Compose to shut down the old version and launch the new one cleanly
             docker compose down
             docker compose up -d --build
-}
