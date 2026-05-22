@@ -1,0 +1,12 @@
+services:
+  web-app:
+    build: .
+    ports:
+      - "80:80"
+
+  database:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: cloud_engineer
+      POSTGRES_PASSWORD: ${PRODUCTION_DB_PASSWORD}
+
