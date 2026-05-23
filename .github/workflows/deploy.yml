@@ -21,7 +21,10 @@ jobs:
             fi
             cd ~/Docker-Project
             git pull origin main
-            docker stop web-app || true
-            docker rm web-app || true
-            docker build -t web-server .
-            docker run -d -p 80:80 --name web-app web-server
+
+            # Inject the secure GitHub Secret into an EC2 environment file
+            echo "PRODUCTION_DB_PASSWORD=${{ secrets.DB_PASSWORD }}" > .env
+            
+            # Use Compose to shut down the old version and launch the new one cleanly
+            docker compose down
+            docker compose up -d --build
